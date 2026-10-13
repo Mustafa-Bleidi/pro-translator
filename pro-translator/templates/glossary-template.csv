@@ -1,0 +1,6 @@
+source,target,target_lang,part_of_speech,context,first_use_note,avoid
+Machine Learning,التعلم الآلي,ar,noun,AI/tech,show English in parentheses on first use,تعلم الآلة
+Large Language Model,大型语言模型,zh,noun,AI/tech,show English + LLM on first use,大语言模型
+dashboard,panel de control,es,noun,software UI,,tablero
+invoice,Rechnung,de,noun,billing,,Faktura
+shall,يجب على,ar,modal,legal obligation,use consistently for every "shall",ينبغي

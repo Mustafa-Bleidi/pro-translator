@@ -1,0 +1,25 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: pip install lxml python-docx python-pptx openpyxl
+      - run: python -m unittest discover -s tests -v
+      - name: Validate SKILL.md front matter
+        run: |
+          python - <<'PY'
+          import re, sys
+          s = open("pro-translator/SKILL.md", encoding="utf-8").read()
+          m = re.match(r"^---\nname: ([a-z0-9-]+)\ndescription: (.+?)\n---\n", s, re.S)
+          assert m, "SKILL.md must start with name/description front matter"
+          assert len(m.group(2)) <= 1024, "description longer than 1024 chars"
+          print("SKILL.md OK:", m.group(1))
+          PY
